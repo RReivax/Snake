@@ -21,13 +21,23 @@ namespace Snake
             switch (keyData) {
                 case Keys.Right:
                 case Keys.D:
+                    if (dir != Space.Orientation.WEST)
+                        dir = Space.Orientation.EAST;
+                    return true;
                 case Keys.Left:
                 case Keys.Q:
+                    if (dir != Space.Orientation.EAST)
+                        dir = Space.Orientation.WEST;
+                    return true;
                 case Keys.Up:
                 case Keys.Z:
+                    if (dir != Space.Orientation.SOUTH)
+                        dir = Space.Orientation.NORTH;
+                    return true;
                 case Keys.Down:
                 case Keys.S:
-                    MessageBox.Show(keyData.ToString());
+                    if (dir != Space.Orientation.NORTH)
+                        dir = Space.Orientation.SOUTH;
                     return true;
                 default:
                     return base.ProcessCmdKey(ref msg, keyData);
@@ -40,7 +50,7 @@ namespace Snake
         {
             this.KeyPreview = true;
             InitializeComponent();
-            state = gameState.STOP;
+            state = gameState.PLAY;
             gamePanel.BackColor = Color.Black;
             //temporary game init
             currentGame = new Game();
@@ -62,20 +72,27 @@ namespace Snake
         private void gameLoop(int lvl) {
             level = lvl;
             timer.Interval = 1000;
-            timer.Enabled = true;
             timer.Start();
         }
 
         private void timer_Tick(object sender, EventArgs e) {
+            if(state == gameState.PLAY) {
+                currentGame.update(dir);
+                updateMap();
+            } else {
+                timer.Stop();
+            }
+        }
+
+        private void updateMap() {
             Cell tmp;
-            currentGame.update(dir);
             gamePanel.SuspendLayout();
             gamePanel.Controls.Clear();
-            for (int i = 0; i < Space.W; i++) {
-                for(int j = 0; j < Space.H; j++) {
-                    if(currentGame.Map[j, i].type != CellType.EMPTY) {
-                        tmp = currentGame.Map[j, i];
-                        tmp.Location = new Point(i * 20, j * 20);
+            for (int i = 0; i < Space.H; i++) {
+                for (int j = 0; j < Space.W; j++) {
+                    if (currentGame.Map[i, j].type != CellType.EMPTY) {
+                        tmp = currentGame.Map[i, j];
+                        tmp.Location = new Point(j * 20, i * 20);
                         gamePanel.Controls.Add(tmp);
                     }
                 }

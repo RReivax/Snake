@@ -8,7 +8,7 @@ namespace Snake
 {
     class Coord
     {
-        public Coord(int xdef, int ydef)
+        public Coord(int ydef, int xdef)
         {
             x = xdef;
             y = ydef;
@@ -16,7 +16,7 @@ namespace Snake
         public int x { get; set; }
         public int y { get; set; }
         public static Coord operator +(Coord vec1, Coord vec2) {
-            return new Snake.Coord((vec1.x + vec2.x)%(Space.H-1), (vec1.y + vec2.y)%(Space.W-1));
+            return new Coord((vec1.y + vec2.y)%(Space.H-1), (vec1.x + vec2.x)%(Space.W-1));
         }
     }
 }
