@@ -16,8 +16,10 @@ namespace Snake
         static Image img_fruit = Image.FromFile("images/fruit.png");
         static Image img_wall = Image.FromFile("images/wall.png");
 
+        public CellType type { private set; get; }
         public Cell(CellType t)
         {
+            type = t;
             switch (t)
             {
                 case CellType.EMPTY:
