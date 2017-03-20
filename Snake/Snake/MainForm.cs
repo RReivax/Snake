@@ -85,14 +85,15 @@ namespace Snake
         }
 
         private void updateMap() {
-            Cell tmp;
             gamePanel.SuspendLayout();
             gamePanel.Controls.Clear();
-            for (int i = 0; i < Space.H; i++) {
-                for (int j = 0; j < Space.W; j++) {
-                    if (currentGame.Map[i, j].type != CellType.EMPTY) {
-                        tmp = currentGame.Map[i, j];
-                        tmp.Location = new Point(j * 20, i * 20);
+            for (int i = 0; i < Space.W; i++) {
+                for(int j = 0; j < Space.H; j++) {
+                    if(currentGame.Map[j, i].type != CellType.EMPTY) {
+                        Console.WriteLine("Map : ( " + j + " ; " + i + " )");
+                        Console.WriteLine("Type = " + currentGame.Map[j, i].type);
+                        Cell tmp = new Cell(currentGame.Map[j, i].type);
+                        tmp.Location = new Point(i * 20, j * 20);
                         gamePanel.Controls.Add(tmp);
                     }
                 }
