@@ -49,8 +49,11 @@
     <Compile Include="Cell.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Scores.cs" />
     <Compile Include="Coord.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="Game.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
