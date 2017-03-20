@@ -23,8 +23,9 @@ namespace Snake
 
     class Game 
     {
-        public Game()
+        public Game(int lvl = 1)
         {
+            level = lvl;
             Map = new Cell[Space.H, Space.W];
             currentScore = 0;
             toGrow = 0;
@@ -106,9 +107,10 @@ namespace Snake
          **/
         public void fruitEaten()
         {
-            toGrow += 2;
+            toGrow += level;
         }
 
+        private int level;
         private int toGrow;
         private int currentScore;
         private LinkedList<Coord> Snake;
