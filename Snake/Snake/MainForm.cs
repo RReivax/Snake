@@ -50,11 +50,16 @@ namespace Snake
         private void buttonStop_Click(object sender, EventArgs e)
         {
             state = gameState.STOP;
+            this.buttonPlayPause.Text = "Play";
         }
 
         private void buttonScores_Click(object sender, EventArgs e)
         {
-            if (state == gameState.PLAY) state = gameState.PAUSE;
+            if (state == gameState.PLAY)
+            {
+                state = gameState.PAUSE;
+                this.buttonPlayPause.Text = "Play";
+            }
             scoresPanel.Visible = true;
             
         }

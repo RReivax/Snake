@@ -34,9 +34,9 @@
             this.buttonScores = new System.Windows.Forms.Button();
             this.buttonPlayPause = new System.Windows.Forms.Button();
             this.scoresPanel = new System.Windows.Forms.Panel();
-            this.buttonPrev = new System.Windows.Forms.Button();
-            this.scoreTitle = new System.Windows.Forms.Label();
             this.scoreList = new System.Windows.Forms.Label();
+            this.scoreTitle = new System.Windows.Forms.Label();
+            this.buttonPrev = new System.Windows.Forms.Button();
             this.menuPanel.SuspendLayout();
             this.scoresPanel.SuspendLayout();
             this.SuspendLayout();
@@ -101,15 +101,13 @@
             this.scoresPanel.TabIndex = 2;
             this.scoresPanel.Visible = false;
             // 
-            // buttonPrev
+            // scoreList
             // 
-            this.buttonPrev.Location = new System.Drawing.Point(12, 561);
-            this.buttonPrev.Name = "buttonPrev";
-            this.buttonPrev.Size = new System.Drawing.Size(95, 39);
-            this.buttonPrev.TabIndex = 0;
-            this.buttonPrev.Text = "Previous";
-            this.buttonPrev.UseVisualStyleBackColor = true;
-            this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
+            this.scoreList.Location = new System.Drawing.Point(117, 100);
+            this.scoreList.Name = "scoreList";
+            this.scoreList.Size = new System.Drawing.Size(600, 500);
+            this.scoreList.TabIndex = 2;
+            this.scoreList.Text = "blabal";
             // 
             // scoreTitle
             // 
@@ -121,13 +119,15 @@
             this.scoreTitle.Text = "Scores";
             this.scoreTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // scoreList
+            // buttonPrev
             // 
-            this.scoreList.Location = new System.Drawing.Point(117, 100);
-            this.scoreList.Name = "scoreList";
-            this.scoreList.Size = new System.Drawing.Size(600, 500);
-            this.scoreList.TabIndex = 2;
-            this.scoreList.Text = "blabal";
+            this.buttonPrev.Location = new System.Drawing.Point(12, 561);
+            this.buttonPrev.Name = "buttonPrev";
+            this.buttonPrev.Size = new System.Drawing.Size(95, 39);
+            this.buttonPrev.TabIndex = 0;
+            this.buttonPrev.Text = "Previous";
+            this.buttonPrev.UseVisualStyleBackColor = true;
+            this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
             // MainForm
             // 
