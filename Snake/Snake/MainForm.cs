@@ -67,14 +67,15 @@ namespace Snake
         }
 
         private void timer_Tick(object sender, EventArgs e) {
-            Cell tmp;
             currentGame.update(dir);
             gamePanel.SuspendLayout();
             gamePanel.Controls.Clear();
             for (int i = 0; i < Space.W; i++) {
                 for(int j = 0; j < Space.H; j++) {
                     if(currentGame.Map[j, i].type != CellType.EMPTY) {
-                        tmp = currentGame.Map[j, i];
+                        Console.WriteLine("Map : ( " + j + " ; " + i + " )");
+                        Console.WriteLine("Type = " + currentGame.Map[j, i].type);
+                        Cell tmp = new Cell(currentGame.Map[j, i].type);
                         tmp.Location = new Point(i * 20, j * 20);
                         gamePanel.Controls.Add(tmp);
                     }
