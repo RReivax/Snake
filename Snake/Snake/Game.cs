@@ -5,19 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-static class Dim
+namespace Snake
 {
-    public const int W = 40;
-    public const int H = 30; 
-}
+    static class Space {
+        public const int W = 40;
+        public const int H = 30;
+        public enum Orientation { NORTH, WEST, SOUTH, EAST };
+    }
 
-namespace Snake 
-{
     class Game : Panel
     {
         public Game()
         {
-            Map = new Cell[Dim.H, Dim.W];
+            Map = new Cell[Space.H, Space.W];
             currentScore = 0;
             this.Show();
         }
