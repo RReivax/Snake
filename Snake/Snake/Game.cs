@@ -27,6 +27,7 @@ namespace Snake
         {
             Map = new Cell[Space.H, Space.W];
             currentScore = 0;
+            toGrow = 0;
         }
 
         /**
@@ -67,7 +68,37 @@ namespace Snake
          **/
         public void update(Space.Orientation dir)
         {
+            Coord next = Snake.First.Value + Space.Vec[(int)dir];
+            switch (Map[next.y, next.x].type)
+            {
+                case CellType.SNAKE:
+                case CellType.WALL:
+                    // game lost
+                    break;
+                case CellType.FRUIT:
+                    fruitEaten();
+                    move(dir);
+                    break;
+                case CellType.EMPTY:
+                    move(dir);
+                    break;
+            }
+        }
 
+        /**
+         * Moves snakes in direction and handle snake growing 
+         **/
+        private void move(Space.Orientation dir)
+        {
+            Coord currentHead = Snake.First.Value;
+            Map[currentHead.x, currentHead.y] = new Cell(CellType.SNAKE);
+            Snake.AddFirst(currentHead + Space.Vec[(int)dir]);
+            Map[Snake.First.Value.x, Snake.First.Value.y] = new Cell(CellType.HEAD);
+            if (toGrow == 0) {
+                Map[Snake.Last.Value.x, Snake.Last.Value.y] = new Cell(CellType.EMPTY);
+                Snake.RemoveLast();
+            }
+            else toGrow--;
         }
 
         /**
@@ -75,9 +106,10 @@ namespace Snake
          **/
         public void fruitEaten()
         {
-            
+            toGrow += 2;
         }
 
+        private int toGrow;
         private int currentScore;
         private LinkedList<Coord> Snake;
         Space.Orientation currentOrientation;
