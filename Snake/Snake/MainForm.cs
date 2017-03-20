@@ -52,6 +52,7 @@ namespace Snake
             InitializeComponent();
             state = gameState.PLAY;
             gamePanel.BackColor = Color.Black;
+            gamePanel.BorderStyle = BorderStyle.FixedSingle;
             //temporary game init
             currentGame = new Game();
             currentGame.initGame();
@@ -92,9 +93,13 @@ namespace Snake
                     if(currentGame.Map[j, i].type != CellType.EMPTY) {
                         Console.WriteLine("Map : ( " + j + " ; " + i + " )");
                         Console.WriteLine("Type = " + currentGame.Map[j, i].type);
-                        Cell tmp = new Cell(currentGame.Map[j, i].type);
-                        tmp.Location = new Point(i * 20, j * 20);
-                        gamePanel.Controls.Add(tmp);
+                        currentGame.Map[j, i].Location = new Point(i * 20, j * 20);
+                        currentGame.Map[j, i].Size = new Size(20, 20);
+                        if(currentGame.Map[j,i].type == CellType.HEAD)
+                        {
+                            //Mettre la bonne orientation
+                        }
+                        gamePanel.Controls.Add(currentGame.Map[j,i]);
                     }
                 }
             }
