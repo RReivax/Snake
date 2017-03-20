@@ -8,12 +8,15 @@ namespace Snake
 {
     class Coord
     {
-        Coord(uint xdef, uint ydef)
+        public Coord(int xdef, int ydef)
         {
             x = xdef;
             y = ydef;
         }
-        uint x { get; set; }
-        uint y { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+        public static Coord operator +(Coord vec1, Coord vec2) {
+            return new Snake.Coord((vec1.x + vec2.x)%Space.H, (vec1.y + vec2.y)%Space.W);
+        }
     }
 }

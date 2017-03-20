@@ -49,8 +49,7 @@ namespace Snake
 
         private void gamePanel_Paint(object sender, PaintEventArgs e)
         {
-            Cell pic = new Cell(CellType.HEAD);
-            gamePanel.Controls.Add(pic);
+
         }
 
         private void gameLoop(int lvl) {
