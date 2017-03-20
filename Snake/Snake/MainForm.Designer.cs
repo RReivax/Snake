@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gamePanel = new System.Windows.Forms.Panel();
             this.menuPanel = new System.Windows.Forms.Panel();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // gamePanel
@@ -46,6 +48,10 @@
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.Size = new System.Drawing.Size(800, 81);
             this.menuPanel.TabIndex = 1;
+            // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // MainForm
             // 
@@ -65,5 +71,6 @@
 
         private System.Windows.Forms.Panel gamePanel;
         private System.Windows.Forms.Panel menuPanel;
+        private System.Windows.Forms.Timer timer;
     }
 }

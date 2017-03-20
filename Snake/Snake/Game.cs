@@ -27,6 +27,7 @@ namespace Snake
             Map = new Cell[Space.H, Space.W];
             currentScore = 0;
             toGrow = 0;
+            Snake = new LinkedList<Coord>();
         }
 
         /**
@@ -39,7 +40,7 @@ namespace Snake
             // Creates empty map
             for (int i = 0; i < Space.W; i++) for (int j = 0; j < Space.H; j++) Map[j, i] = new Cell(CellType.EMPTY);
             // Generates snake (head + 2 body)
-            Snake.AddFirst(new Coord(5 + rand.Next(Space.H - 5), 5 + rand.Next(Space.W - 5)));
+            Snake.AddFirst(new Coord(5 + rand.Next(Space.H - 10), 5 + rand.Next(Space.W - 10)));
             currentOrientation = (Space.Orientation)rand.Next(4);
             Snake.AddLast(Snake.First.Value + Space.Vec[(int)currentOrientation]);
             Snake.AddLast(Snake.Last.Value + Space.Vec[(int)currentOrientation]);
@@ -59,7 +60,7 @@ namespace Snake
                     fruitOk = true;
                 }
                 
-            } while (fruitOk);
+            } while (!fruitOk);
         }
 
         /**

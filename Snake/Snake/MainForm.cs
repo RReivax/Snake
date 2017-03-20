@@ -15,6 +15,7 @@ namespace Snake
     {
         private int level;
         private Space.Orientation dir;
+        private Game currentGame;
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             switch (keyData) {
@@ -40,6 +41,12 @@ namespace Snake
             this.KeyPreview = true;
             InitializeComponent();
             state = gameState.STOP;
+            gamePanel.BackColor = Color.Black;
+            //temporary game init
+            currentGame = new Game();
+            currentGame.initGame();
+            dir = currentGame.currentOrientation;
+            gameLoop(1);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -49,12 +56,31 @@ namespace Snake
 
         private void gamePanel_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void gameLoop(int lvl) {
             level = lvl;
+            timer.Interval = 1000;
+            timer.Enabled = true;
+            timer.Start();
+        }
 
+        private void timer_Tick(object sender, EventArgs e) {
+            Cell tmp;
+            currentGame.update(dir);
+            gamePanel.SuspendLayout();
+            gamePanel.Controls.Clear();
+            for (int i = 0; i < Space.W; i++) {
+                for(int j = 0; j < Space.H; j++) {
+                    if(currentGame.Map[j, i].type != CellType.EMPTY) {
+                        tmp = currentGame.Map[j, i];
+                        tmp.Location = new Point(i * 20, j * 20);
+                        gamePanel.Controls.Add(tmp);
+                    }
+                }
+            }
+            gamePanel.ResumeLayout();
         }
     }
 }
