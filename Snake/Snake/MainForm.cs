@@ -71,7 +71,8 @@ namespace Snake
 
         private void gameLoop(int lvl) {
             level = lvl;
-            timer.Interval = 1000;
+            timer.Interval = 500;
+            timer.Enabled = true;
             timer.Start();
         }
 
@@ -92,9 +93,8 @@ namespace Snake
                     if(currentGame.Map[j, i].type != CellType.EMPTY) {
                         Console.WriteLine("Map : ( " + j + " ; " + i + " )");
                         Console.WriteLine("Type = " + currentGame.Map[j, i].type);
-                        Cell tmp = new Cell(currentGame.Map[j, i].type);
-                        tmp.Location = new Point(i * 20, j * 20);
-                        gamePanel.Controls.Add(tmp);
+                        currentGame.Map[j, i].Location = new Point(i * 20, j * 20);
+                        gamePanel.Controls.Add(currentGame.Map[j, i]);
                     }
                 }
             }
