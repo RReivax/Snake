@@ -44,8 +44,8 @@ namespace Snake
             }
         }
 
+        public gameState state;
 
-    public gameState state;
         public MainForm()
         {
             this.KeyPreview = true;
@@ -113,5 +113,42 @@ namespace Snake
             }
 
         }
+
+        private void buttonPlayPause_Click(object sender, EventArgs e)
+        {
+            if (this.buttonPlayPause.Text == "Play")
+            {
+                state = gameState.PLAY;
+                this.buttonPlayPause.Text = "Pause";
+            }
+            else
+            {
+                state = gameState.PAUSE;
+                this.buttonPlayPause.Text = "Play";
+            }
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            state = gameState.STOP;
+            this.buttonPlayPause.Text = "Play";
+        }
+
+        private void buttonScores_Click(object sender, EventArgs e)
+        {
+            if (state == gameState.PLAY)
+            {
+                state = gameState.PAUSE;
+                this.buttonPlayPause.Text = "Play";
+            }
+            scoresPanel.Visible = true;
+            
+        }
+
+        private void buttonPrev_Click(object sender, EventArgs e)
+        {
+            scoresPanel.Visible = false;
+        }
+
     }
 }
