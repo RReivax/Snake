@@ -52,10 +52,11 @@ namespace Snake
             InitializeComponent();
             state = gameState.PLAY;
             gamePanel.BackColor = Color.Black;
-            //temporary game init
+            gamePanel.BorderStyle = BorderStyle.FixedSingle;
             currentGame = new Game();
             currentGame.initGame();
             dir = currentGame.currentOrientation;
+            //temporary game init
             gameLoop(1);
         }
 
@@ -70,23 +71,24 @@ namespace Snake
         }
 
         private void gameLoop(int lvl) {
-            level = lvl;
-            timer.Interval = 500;
+            timer.Interval = 500/(int)Math.Sqrt(4);
             timer.Enabled = true;
             timer.Start();
         }
 
         private void timer_Tick(object sender, EventArgs e) {
             if(state == gameState.PLAY) {
-                currentGame.update(dir);
-                updateMap();
-            } else {
-                timer.Stop();
+                Boolean wall = currentGame.update(dir);
+                if (wall) {
+                    updateMap();
+                } else {
+                    endOfGame(wall);
+                }
             }
         }
 
         private void updateMap() {
-            gamePanel.SuspendLayout();
+            //gamePanel.SuspendLayout();
             gamePanel.Controls.Clear();
             for (int i = 0; i < Space.W; i++) {
                 for(int j = 0; j < Space.H; j++) {
@@ -94,11 +96,22 @@ namespace Snake
                         Console.WriteLine("Map : ( " + j + " ; " + i + " )");
                         Console.WriteLine("Type = " + currentGame.Map[j, i].type);
                         currentGame.Map[j, i].Location = new Point(i * 20, j * 20);
-                        gamePanel.Controls.Add(currentGame.Map[j, i]);
+                        currentGame.Map[j, i].Size = new Size(20, 20);                        
+                        gamePanel.Controls.Add(currentGame.Map[j,i]);
                     }
                 }
             }
-            gamePanel.ResumeLayout();
+            //gamePanel.ResumeLayout();
+        }
+
+        private void endOfGame(Boolean wall = false) {
+            timer.Stop();
+            if (wall) {
+
+            } else {
+
+            }
+
         }
     }
 }

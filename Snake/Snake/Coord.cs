@@ -23,7 +23,7 @@ namespace Snake
                 Y = (vec1.y + vec2.y) % (Space.H - 1);
 
             if ((vec1.x + vec2.x) < 0)
-                X = Space.H - 1;
+                X = Space.W - 1;
             else
                 X = (vec1.x + vec2.x) % (Space.W - 1);
 

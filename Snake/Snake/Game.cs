@@ -9,8 +9,8 @@ namespace Snake
 {
     static class Space
     {
-        public const int W = 30;
-        public const int H = 20;
+        public const int W = 40;
+        public const int H = 25;
         public static Coord VecNorth = new Coord(-1, 0);
         public static Coord VecSouth = new Coord(1, 0);
         public static Coord VecWest = new Coord(0, -1);
