@@ -16,6 +16,7 @@ namespace Snake
         private int level;
         private Space.Orientation dir;
         private Game currentGame;
+        public gameState state;
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             switch (keyData) {
@@ -44,20 +45,13 @@ namespace Snake
             }
         }
 
-        public gameState state;
-
         public MainForm()
         {
             this.KeyPreview = true;
             InitializeComponent();
-            state = gameState.PLAY;
+            state = gameState.STOP;
             gamePanel.BackColor = Color.Black;
             gamePanel.BorderStyle = BorderStyle.FixedSingle;
-            currentGame = new Game();
-            currentGame.initGame();
-            dir = currentGame.currentOrientation;
-            //temporary game init
-            gameLoop(1);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -70,25 +64,28 @@ namespace Snake
             
         }
 
-        private void gameLoop(int lvl) {
-            timer.Interval = 500/(int)Math.Sqrt(4);
+        private void gameLoop(int lvl = 1) {
+            currentGame = new Game();
+            currentGame.initGame();
+            dir = currentGame.currentOrientation;
+            timer.Interval = 500/(int)Math.Sqrt(lvl);
             timer.Enabled = true;
             timer.Start();
         }
 
         private void timer_Tick(object sender, EventArgs e) {
             if(state == gameState.PLAY) {
-                Boolean wall = currentGame.update(dir);
-                if (wall) {
+                if (currentGame.update(dir)) {
                     updateMap();
                 } else {
-                    endOfGame(wall);
+                    if(state != gameState.PAUSE)
+                        endOfGame();
                 }
             }
         }
 
         private void updateMap() {
-            //gamePanel.SuspendLayout();
+            gamePanel.SuspendLayout();
             gamePanel.Controls.Clear();
             for (int i = 0; i < Space.W; i++) {
                 for(int j = 0; j < Space.H; j++) {
@@ -101,23 +98,21 @@ namespace Snake
                     }
                 }
             }
-            //gamePanel.ResumeLayout();
+            gamePanel.ResumeLayout();
         }
 
         private void endOfGame(Boolean wall = false) {
             timer.Stop();
-            if (wall) {
-
-            } else {
-
-            }
-
+            scoresPanel.Visible = true;
         }
 
         private void buttonPlayPause_Click(object sender, EventArgs e)
         {
             if (this.buttonPlayPause.Text == "Play")
             {
+                if(state == gameState.STOP) {
+                    gameLoop();
+                }
                 state = gameState.PLAY;
                 this.buttonPlayPause.Text = "Pause";
             }
@@ -131,6 +126,8 @@ namespace Snake
         private void buttonStop_Click(object sender, EventArgs e)
         {
             state = gameState.STOP;
+            gamePanel.Controls.Clear();
+            scoresPanel.Visible = true;
             this.buttonPlayPause.Text = "Play";
         }
 
@@ -142,7 +139,6 @@ namespace Snake
                 this.buttonPlayPause.Text = "Play";
             }
             scoresPanel.Visible = true;
-            
         }
 
         private void buttonPrev_Click(object sender, EventArgs e)
