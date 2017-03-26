@@ -31,14 +31,15 @@
             this.components = new System.ComponentModel.Container();
             this.gamePanel = new System.Windows.Forms.Panel();
             this.menuPanel = new System.Windows.Forms.Panel();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonScores = new System.Windows.Forms.Button();
             this.buttonPlayPause = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.scoresPanel = new System.Windows.Forms.Panel();
             this.scoreList = new System.Windows.Forms.Label();
             this.scoreTitle = new System.Windows.Forms.Label();
             this.buttonPrev = new System.Windows.Forms.Button();
+            this.gamePanel2 = new System.Windows.Forms.Panel();
             this.menuPanel.SuspendLayout();
             this.scoresPanel.SuspendLayout();
             this.SuspendLayout();
@@ -61,9 +62,6 @@
             this.menuPanel.Size = new System.Drawing.Size(800, 81);
             this.menuPanel.TabIndex = 1;
             // 
-            // timer
-            // 
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // buttonStop
             // 
             this.buttonStop.Location = new System.Drawing.Point(100, 10);
@@ -93,6 +91,10 @@
             this.buttonPlayPause.Text = "Play";
             this.buttonPlayPause.UseVisualStyleBackColor = true;
             this.buttonPlayPause.Click += new System.EventHandler(this.buttonPlayPause_Click);
+            // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // scoresPanel
             // 
@@ -134,11 +136,19 @@
             this.buttonPrev.UseVisualStyleBackColor = true;
             this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
+            // gamePanel2
+            // 
+            this.gamePanel2.Location = new System.Drawing.Point(17, 100);
+            this.gamePanel2.Name = "gamePanel2";
+            this.gamePanel2.Size = new System.Drawing.Size(800, 500);
+            this.gamePanel2.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 611);
+            this.Controls.Add(this.gamePanel2);
             this.Controls.Add(this.scoresPanel);
             this.Controls.Add(this.menuPanel);
             this.Controls.Add(this.gamePanel);
@@ -163,5 +173,6 @@
         private System.Windows.Forms.Button buttonPrev;
         private System.Windows.Forms.Label scoreTitle;
         private System.Windows.Forms.Label scoreList;
+        private System.Windows.Forms.Panel gamePanel2;
     }
 }

@@ -20,12 +20,12 @@ namespace Snake
             if ((vec1.y + vec2.y) < 0) 
                 Y = Space.H - 1;
             else 
-                Y = (vec1.y + vec2.y) % (Space.H - 1);
+                Y = (vec1.y + vec2.y) % (Space.H);
 
             if ((vec1.x + vec2.x) < 0)
                 X = Space.W - 1;
             else
-                X = (vec1.x + vec2.x) % (Space.W - 1);
+                X = (vec1.x + vec2.x) % (Space.W);
 
             return new Snake.Coord(Y, X);
         }

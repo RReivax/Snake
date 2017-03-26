@@ -131,6 +131,31 @@ namespace Snake
         public void fruitEaten()
         {
             toGrow += level;
+            Random rand = new Random(); 
+            bool fruitOk = false;
+            do
+            {
+                int y = rand.Next(Space.H);
+                int x = rand.Next(Space.W);
+                if (Map[y, x].type == CellType.EMPTY) {
+                    Map[y, x] = new Cell(CellType.FRUIT);
+                    fruitOk = true;
+                }
+
+            } while (!fruitOk);
+            bool wallOk = false;
+            do
+            {
+                int y = rand.Next(Space.H);
+                int x = rand.Next(Space.W);
+                if (Map[y, x].type != CellType.SNAKE && Map[y, x].type != CellType.HEAD)
+                {
+                    Map[y, x] = new Cell(CellType.WALL);
+                    wallOk = true;
+                }
+
+            } while (!wallOk);
+
         }
 
         private int level;
