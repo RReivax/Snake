@@ -70,7 +70,7 @@ namespace Snake
             currentGame = new Game();
             currentGame.initGame();
             dir = currentGame.currentOrientation;
-            timer.Interval = 500/(int)Math.Sqrt(lvl);
+            timer.Interval = 200/(int)Math.Sqrt(lvl);
             timer.Enabled = true;
             timer.Start();
         }
