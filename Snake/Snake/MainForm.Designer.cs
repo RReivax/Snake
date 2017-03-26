@@ -114,6 +114,7 @@
             this.ScoresDisplay.Size = new System.Drawing.Size(500, 400);
             this.ScoresDisplay.TabIndex = 3;
             this.ScoresDisplay.UseCompatibleStateImageBehavior = false;
+            this.ScoresDisplay.SelectedIndexChanged += new System.EventHandler(this.ScoresDisplay_SelectedIndexChanged);
             // 
             // scoreTitle
             // 

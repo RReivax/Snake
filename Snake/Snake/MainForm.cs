@@ -212,5 +212,10 @@ namespace Snake
             tmp.Show();
             return tmp.p;
         }
+
+        private void ScoresDisplay_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
