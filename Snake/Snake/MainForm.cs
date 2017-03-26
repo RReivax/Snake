@@ -177,6 +177,7 @@ namespace Snake
             gamePanel.Controls.Clear();
             gamePanel.Visible = false;
             scoresPanel.Visible = true;
+            displayScore();
             this.buttonPlayPause.Text = "Play";
         }
 
@@ -195,14 +196,17 @@ namespace Snake
         private void buttonPrev_Click(object sender, EventArgs e) {
             gamePanel.Visible = true;
             scoresPanel.Visible = false;
+            ScoresDisplay.Items.Clear();
         }
 
         private void displayScore() {
+            best.load();
             ScoresDisplay.BeginUpdate();
             foreach (ScoreEntry sc in best.scores) {
                 ListViewItem item = new ListViewItem(new String[] { sc.pseudo, sc.score.ToString() });
                 ScoresDisplay.Items.Add(item);
             }
+            ScoresDisplay.Sort();
             ScoresDisplay.EndUpdate();
         }
 
@@ -211,8 +215,11 @@ namespace Snake
             return pseudoIn.p;
         }
 
-        private void ScoresDisplay_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void ScoresDisplay_SelectedIndexChanged_1(object sender, EventArgs e) {
+
+        }
+
+        private void ScoresDisplay_ColumnClick(object sender, EventArgs e) {
 
         }
     }

@@ -114,13 +114,13 @@
             this.ScoresDisplay.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Pseudo,
             this.Score});
-            this.ScoresDisplay.Location = new System.Drawing.Point(177, 110);
+            this.ScoresDisplay.Location = new System.Drawing.Point(178, 110);
             this.ScoresDisplay.Name = "ScoresDisplay";
             this.ScoresDisplay.Size = new System.Drawing.Size(500, 400);
             this.ScoresDisplay.TabIndex = 3;
             this.ScoresDisplay.UseCompatibleStateImageBehavior = false;
-
             this.ScoresDisplay.View = System.Windows.Forms.View.Details;
+            this.ScoresDisplay.SelectedIndexChanged += new System.EventHandler(this.ScoresDisplay_SelectedIndexChanged_1);
             // 
             // Pseudo
             // 
@@ -131,7 +131,6 @@
             // 
             this.Score.Text = "Score";
             this.Score.Width = 249;
-
             // 
             // scoreTitle
             // 
