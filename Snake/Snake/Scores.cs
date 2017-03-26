@@ -10,40 +10,48 @@ using System.Xml.Serialization;
 
 namespace Snake
 {
-    class ScoreEntry
-    {
+    public class ScoreEntry {
         public int score { get; set; }
         public String pseudo { get; set; }
+
+        public ScoreEntry() { }
+
+        public ScoreEntry(String p, int s) {
+            score = s;
+            pseudo = p;
+        }
     }
-    class ScoreList
-    {
-        public List<ScoreEntry> scores = new List<ScoreEntry>();
 
-        private void addScore()
-        {
-            Console.WriteLine("Enter a name :");
-            String name = Console.ReadLine();
-            var score = new ScoreEntry() { score = 100, pseudo = name };
-            scores.Add(score);
+    public class ScoreList {
+        
+        public List<ScoreEntry> scores { get; private set; }
+        private XmlSerializer serial;
+
+        public ScoreList() {
+            scores = new List<ScoreEntry>();
+            serial = new XmlSerializer(scores.GetType());
+            if(File.Exists("Scores.xml")) load();
         }
 
-        private void Save()
+        public void addScore(String pseudo, int s) {
+            scores.Add(new ScoreEntry(pseudo, s));
+            save();
+        }
+
+        public void save()
         {
-            var serializer = new XmlSerializer(scores.GetType(), "ScoreList.ScoreEntry");
-            using (var writer = new StreamWriter("Scores.xml", false))
+            using (StreamWriter writer = new StreamWriter(File.OpenWrite("Scores.xml")))
             {
-                serializer.Serialize(writer.BaseStream, scores);
+                serial.Serialize(writer, scores);
             }
-
         }
 
-        private void Load()
+        public void load()
         {
-            var serializer = new XmlSerializer(scores.GetType(), "ScoreList.ScoreEntry");
             object obj;
-            using (var reader = new StreamReader("Scores.xml", false))
+            using (StreamReader reader = new StreamReader(File.OpenRead("Scores.xml")))
             {
-                obj = serializer.Deserialize(reader.BaseStream);
+                obj = serial.Deserialize(reader.BaseStream);
             }
             scores = (List<ScoreEntry>)obj;
         }

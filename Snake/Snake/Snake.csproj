@@ -49,6 +49,12 @@
     <Compile Include="Cell.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PseudoInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PseudoInput.Designer.cs">
+      <DependentUpon>PseudoInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="Scores.cs" />
     <Compile Include="Coord.cs" />
     <Compile Include="Game.cs" />
@@ -72,6 +78,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PseudoInput.resx">
+      <DependentUpon>PseudoInput.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

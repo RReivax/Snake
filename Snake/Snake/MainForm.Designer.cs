@@ -36,10 +36,9 @@
             this.buttonPlayPause = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.scoresPanel = new System.Windows.Forms.Panel();
-            this.scoreList = new System.Windows.Forms.Label();
+            this.ScoresDisplay = new System.Windows.Forms.ListView();
             this.scoreTitle = new System.Windows.Forms.Label();
             this.buttonPrev = new System.Windows.Forms.Button();
-            this.gamePanel2 = new System.Windows.Forms.Panel();
             this.menuPanel.SuspendLayout();
             this.scoresPanel.SuspendLayout();
             this.SuspendLayout();
@@ -98,7 +97,7 @@
             // 
             // scoresPanel
             // 
-            this.scoresPanel.Controls.Add(this.scoreList);
+            this.scoresPanel.Controls.Add(this.ScoresDisplay);
             this.scoresPanel.Controls.Add(this.scoreTitle);
             this.scoresPanel.Controls.Add(this.buttonPrev);
             this.scoresPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -108,13 +107,13 @@
             this.scoresPanel.TabIndex = 2;
             this.scoresPanel.Visible = false;
             // 
-            // scoreList
+            // ScoresDisplay
             // 
-            this.scoreList.Location = new System.Drawing.Point(117, 100);
-            this.scoreList.Name = "scoreList";
-            this.scoreList.Size = new System.Drawing.Size(600, 500);
-            this.scoreList.TabIndex = 2;
-            this.scoreList.Text = "blabal";
+            this.ScoresDisplay.Location = new System.Drawing.Point(177, 110);
+            this.ScoresDisplay.Name = "ScoresDisplay";
+            this.ScoresDisplay.Size = new System.Drawing.Size(500, 400);
+            this.ScoresDisplay.TabIndex = 3;
+            this.ScoresDisplay.UseCompatibleStateImageBehavior = false;
             // 
             // scoreTitle
             // 
@@ -136,19 +135,11 @@
             this.buttonPrev.UseVisualStyleBackColor = true;
             this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
-            // gamePanel2
-            // 
-            this.gamePanel2.Location = new System.Drawing.Point(17, 100);
-            this.gamePanel2.Name = "gamePanel2";
-            this.gamePanel2.Size = new System.Drawing.Size(800, 500);
-            this.gamePanel2.TabIndex = 3;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 611);
-            this.Controls.Add(this.gamePanel2);
             this.Controls.Add(this.scoresPanel);
             this.Controls.Add(this.menuPanel);
             this.Controls.Add(this.gamePanel);
@@ -172,7 +163,6 @@
         private System.Windows.Forms.Panel scoresPanel;
         private System.Windows.Forms.Button buttonPrev;
         private System.Windows.Forms.Label scoreTitle;
-        private System.Windows.Forms.Label scoreList;
-        private System.Windows.Forms.Panel gamePanel2;
+        private System.Windows.Forms.ListView ScoresDisplay;
     }
 }

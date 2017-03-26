@@ -18,9 +18,11 @@ namespace Snake
         private Boolean dirRead;
         private Space.Orientation imgDir;
         private Game currentGame;
-        public gameState state;
-        List<Cell> buffer;
-        int panelDisplay;
+        private Cell[,] displayedMap;
+        private gameState state;
+        private List<Cell> buffer;
+        private int size;
+        public ScoreList best;
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             switch (keyData) {
@@ -61,15 +63,16 @@ namespace Snake
         {
             this.KeyPreview = true;
             InitializeComponent();
+            displayedMap = new Cell[Space.H, Space.W];
+            for (int i = 0; i < Space.W; i++) for (int j = 0; j < Space.H; j++) displayedMap[j, i] = new Cell(CellType.EMPTY);
             buffer = new List<Cell>();
             dirRead = false;
             state = gameState.STOP;
             gamePanel.BackColor = Color.Black;
             gamePanel.BorderStyle = BorderStyle.FixedSingle;
-            gamePanel2.BackColor = Color.Black;
-            gamePanel2.BorderStyle = BorderStyle.FixedSingle;
             imgDir = Space.Orientation.NORTH;
-            panelDisplay = 1;
+            size = 0;
+            best = new ScoreList();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -104,20 +107,16 @@ namespace Snake
         }
 
         private void updateMap() {
-            int nb_img = 0;
+            int s = 0;
             for (int i = 0; i < Space.W; i++) {
-                for(int j = 0; j < Space.H; j++) {
-                    if(currentGame.Map[j, i].type != CellType.EMPTY) {
-                        nb_img++;
-                        Console.WriteLine("Map : ( " + j + " ; " + i + " )");
-                        Console.WriteLine("Type = " + currentGame.Map[j, i].type);
+                for (int j = 0; j < Space.H; j++) {
+                    if(currentGame.Map[j, i].type != displayedMap[j, i].type) {
                         currentGame.Map[j, i].Location = new Point(i * 20, j * 20);
                         currentGame.Map[j, i].Size = new Size(20, 20);
-
-                        if (currentGame.Map[j, i].type == CellType.HEAD)
-                        {
-                            while (imgDir != dir)
-                            {
+                        if (currentGame.Map[j, i].type == CellType.HEAD || currentGame.Map[j, i].type == CellType.SNAKE)
+                            s++;
+                        if (currentGame.Map[j, i].type == CellType.HEAD) {
+                            while (imgDir != dir) {
                                 currentGame.Map[j, i].Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
                                 if (imgDir == Space.Orientation.EAST)
                                     imgDir = Space.Orientation.NORTH;
@@ -125,24 +124,21 @@ namespace Snake
                                     imgDir++;
                             }
                         }
-                        buffer.Add(currentGame.Map[j,i]);
+                        foreach(Cell c in gamePanel.Controls) {
+                            if(c.Location == new Point(i*20, j * 20)) {
+                                c.Dispose();
+                            }
+                        }
+                        if (currentGame.Map[j, i].type != CellType.EMPTY) {
+                            Console.WriteLine("Map : ( " + j + " ; " + i + " )");
+                            Console.WriteLine("Type = " + currentGame.Map[j, i].type);
+                            gamePanel.Controls.Add(currentGame.Map[j, i]);
+                            displayedMap[j, i] = currentGame.Map[j, i];
+                        }
                     }
                 }
             }
-            if(panelDisplay == 1) {
-                gamePanel2.Controls.Clear();
-                gamePanel2.Controls.AddRange(buffer.ToArray());
-                gamePanel2.Visible = true;
-                gamePanel.Visible = false;
-                panelDisplay = 2;
-            } else {
-                gamePanel.Controls.Clear();
-                gamePanel.Controls.AddRange(buffer.ToArray());
-                gamePanel.Visible = true;
-                gamePanel2.Visible = false;
-                panelDisplay = 1;
-            }
-            buffer.Clear();
+            size = s;
         }
 
         private void endOfGame(Boolean wall = false) {
@@ -150,10 +146,11 @@ namespace Snake
             timer.Stop();
             this.buttonPlayPause.Text = "Play";
             gamePanel.Visible = false;
-            gamePanel2.Visible = false;
             scoresPanel.Visible = true;
+            best.addScore(askPseudo(), size);
+            MessageBox.Show(best.ToString());
+            displayScore();
             gamePanel.Controls.Clear();
-            gamePanel2.Controls.Clear();
         }
 
         private void buttonPlayPause_Click(object sender, EventArgs e)
@@ -178,7 +175,6 @@ namespace Snake
             state = gameState.STOP;
             gamePanel.Controls.Clear();
             gamePanel.Visible = false;
-            gamePanel2.Visible = false;
             scoresPanel.Visible = true;
             this.buttonPlayPause.Text = "Play";
         }
@@ -191,20 +187,30 @@ namespace Snake
                 this.buttonPlayPause.Text = "Play";
             }
             gamePanel.Visible = false;
-            gamePanel2.Visible = false;
             scoresPanel.Visible = true;
+            displayScore();
         }
 
-        private void buttonPrev_Click(object sender, EventArgs e)
-        {
+        private void buttonPrev_Click(object sender, EventArgs e) {
             gamePanel.Visible = true;
-            gamePanel2.Visible = false;
-            panelDisplay = 1;
             scoresPanel.Visible = false;
         }
 
-        private void gamePanel2_Paint(object sender, PaintEventArgs e) {
+        private void displayScore() {
+            foreach(ScoreEntry sc in best.scores) {
+                ListViewItem tmp = new ListViewItem();
+                ScoresDisplay.BeginUpdate();
+                tmp.SubItems.Add(sc.pseudo);
+                tmp.SubItems.Add(sc.score.ToString());
+                ScoresDisplay.Items.Add(tmp);
+                ScoresDisplay.EndUpdate();
+            }
+        }
 
+        private String askPseudo() {
+            PseudoInput tmp = new PseudoInput();
+            tmp.Show();
+            return tmp.p;
         }
     }
 }
