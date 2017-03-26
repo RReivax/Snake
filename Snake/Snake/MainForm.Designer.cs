@@ -37,6 +37,8 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.scoresPanel = new System.Windows.Forms.Panel();
             this.ScoresDisplay = new System.Windows.Forms.ListView();
+            this.Pseudo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Score = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.scoreTitle = new System.Windows.Forms.Label();
             this.buttonPrev = new System.Windows.Forms.Button();
             this.menuPanel.SuspendLayout();
@@ -109,11 +111,25 @@
             // 
             // ScoresDisplay
             // 
+            this.ScoresDisplay.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Pseudo,
+            this.Score});
             this.ScoresDisplay.Location = new System.Drawing.Point(177, 110);
             this.ScoresDisplay.Name = "ScoresDisplay";
             this.ScoresDisplay.Size = new System.Drawing.Size(500, 400);
             this.ScoresDisplay.TabIndex = 3;
             this.ScoresDisplay.UseCompatibleStateImageBehavior = false;
+            this.ScoresDisplay.View = System.Windows.Forms.View.Details;
+            // 
+            // Pseudo
+            // 
+            this.Pseudo.Text = "Pseudo";
+            this.Pseudo.Width = 250;
+            // 
+            // Score
+            // 
+            this.Score.Text = "Score";
+            this.Score.Width = 249;
             // 
             // scoreTitle
             // 
@@ -164,5 +180,7 @@
         private System.Windows.Forms.Button buttonPrev;
         private System.Windows.Forms.Label scoreTitle;
         private System.Windows.Forms.ListView ScoresDisplay;
+        private System.Windows.Forms.ColumnHeader Pseudo;
+        private System.Windows.Forms.ColumnHeader Score;
     }
 }
