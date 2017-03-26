@@ -15,6 +15,7 @@ namespace Snake
     {
         private int level;
         private Space.Orientation dir;
+        private Boolean dirRead = false;
         private Game currentGame;
         public gameState state;
 
@@ -22,23 +23,31 @@ namespace Snake
             switch (keyData) {
                 case Keys.Right:
                 case Keys.D:
-                    if (dir != Space.Orientation.WEST)
+                    if (dir != Space.Orientation.WEST && dirRead) {
                         dir = Space.Orientation.EAST;
+                        dirRead = false;
+                    }
                     return true;
                 case Keys.Left:
                 case Keys.Q:
-                    if (dir != Space.Orientation.EAST)
+                    if (dir != Space.Orientation.EAST && dirRead) {
                         dir = Space.Orientation.WEST;
+                        dirRead = false;
+                    }
                     return true;
                 case Keys.Up:
                 case Keys.Z:
-                    if (dir != Space.Orientation.SOUTH)
+                    if (dir != Space.Orientation.SOUTH && dirRead) {
                         dir = Space.Orientation.NORTH;
+                        dirRead = false;
+                    }
                     return true;
                 case Keys.Down:
                 case Keys.S:
-                    if (dir != Space.Orientation.NORTH)
+                    if (dir != Space.Orientation.NORTH && dirRead) {
                         dir = Space.Orientation.SOUTH;
+                        dirRead = false;
+                    }
                     return true;
                 default:
                     return base.ProcessCmdKey(ref msg, keyData);
@@ -76,6 +85,7 @@ namespace Snake
         private void timer_Tick(object sender, EventArgs e) {
             if(state == gameState.PLAY) {
                 if (currentGame.update(dir)) {
+                    dirRead = true;
                     updateMap();
                 } else {
                     if(state != gameState.PAUSE)
@@ -102,8 +112,11 @@ namespace Snake
         }
 
         private void endOfGame(Boolean wall = false) {
+            state = gameState.STOP;
             timer.Stop();
+            this.buttonPlayPause.Text = "Play";
             scoresPanel.Visible = true;
+            gamePanel.Controls.Clear();
         }
 
         private void buttonPlayPause_Click(object sender, EventArgs e)
