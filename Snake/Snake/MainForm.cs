@@ -112,11 +112,11 @@ namespace Snake
             int s = 0;
             for (int i = 0; i < Space.W; i++) {
                 for (int j = 0; j < Space.H; j++) {
-                    if(currentGame.Map[j, i].type != displayedMap[j, i].type) {
+                    if (currentGame.Map[j, i].type == CellType.HEAD || currentGame.Map[j, i].type == CellType.SNAKE)
+                        s++;
+                    if (currentGame.Map[j, i].type != displayedMap[j, i].type) {
                         currentGame.Map[j, i].Location = new Point(i * 20, j * 20);
                         currentGame.Map[j, i].Size = new Size(20, 20);
-                        if (currentGame.Map[j, i].type == CellType.HEAD || currentGame.Map[j, i].type == CellType.SNAKE)
-                            s++;
                         if (currentGame.Map[j, i].type == CellType.HEAD) {
                             while (imgDir != dir) {
                                 currentGame.Map[j, i].Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
@@ -150,7 +150,6 @@ namespace Snake
             gamePanel.Visible = false;
             scoresPanel.Visible = true;
             best.addScore(askPseudo(), size);
-            MessageBox.Show(askPseudo());
             displayScore();
             gamePanel.Controls.Clear();
         }
@@ -199,14 +198,12 @@ namespace Snake
         }
 
         private void displayScore() {
-            foreach(ScoreEntry sc in best.scores) {
-                ListViewItem tmp = new ListViewItem();
-                ScoresDisplay.BeginUpdate();
-                tmp.SubItems.Add(sc.pseudo);
-                tmp.SubItems.Add(sc.score.ToString());
-                ScoresDisplay.Items.Add(tmp);
-                ScoresDisplay.EndUpdate();
+            ScoresDisplay.BeginUpdate();
+            foreach (ScoreEntry sc in best.scores) {
+                ListViewItem item = new ListViewItem(new String[] { sc.pseudo, sc.score.ToString() });
+                ScoresDisplay.Items.Add(item);
             }
+            ScoresDisplay.EndUpdate();
         }
 
         private String askPseudo() {

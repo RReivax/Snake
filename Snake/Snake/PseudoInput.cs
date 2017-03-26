@@ -35,12 +35,8 @@ namespace Snake {
         private void ok_Click(object sender, EventArgs e) {
             p = pseudo.Text;
             pseudo.Clear();
-            
-        }
 
-        private void PseudoInput_Load(object sender, EventArgs e)
-        {
-
+            this.Close();
         }
     }
 }

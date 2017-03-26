@@ -30,7 +30,7 @@
             // 
             // pseudo
             // 
-            this.pseudo.Location = new System.Drawing.Point(15, 47);
+            this.pseudo.Location = new System.Drawing.Point(12, 28);
             this.pseudo.Name = "pseudo";
             this.pseudo.Size = new System.Drawing.Size(112, 20);
             this.pseudo.TabIndex = 0;
@@ -40,14 +40,14 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(169, 26);
+            this.label1.Size = new System.Drawing.Size(169, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Your score is part of the top 10!\r\nPlease enter your pseudo bellow ;)";
+            this.label1.Text = "Please enter your pseudo bellow ;)";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // ok
             // 
-            this.ok.Location = new System.Drawing.Point(150, 47);
+            this.ok.Location = new System.Drawing.Point(151, 28);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(59, 20);
             this.ok.TabIndex = 2;
@@ -59,13 +59,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(222, 79);
+            this.ClientSize = new System.Drawing.Size(222, 60);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pseudo);
             this.Name = "PseudoInput";
             this.Text = "Congratulations!";
-            this.Load += new System.EventHandler(this.PseudoInput_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
