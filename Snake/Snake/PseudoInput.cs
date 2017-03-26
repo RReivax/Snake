@@ -15,7 +15,7 @@ namespace Snake {
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             switch (keyData) {
                 case Keys.Enter:
-                    p = pseudo.ToString();
+                    p = pseudo.Text;
                     pseudo.Clear();
                     this.Close();
                     return true;
@@ -35,6 +35,12 @@ namespace Snake {
         private void ok_Click(object sender, EventArgs e) {
             p = pseudo.Text;
             pseudo.Clear();
+            
+        }
+
+        private void PseudoInput_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

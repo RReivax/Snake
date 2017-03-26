@@ -65,6 +65,7 @@
             this.Controls.Add(this.pseudo);
             this.Name = "PseudoInput";
             this.Text = "Congratulations!";
+            this.Load += new System.EventHandler(this.PseudoInput_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
