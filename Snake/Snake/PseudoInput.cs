@@ -16,6 +16,7 @@ namespace Snake {
             switch (keyData) {
                 case Keys.Enter:
                     p = pseudo.ToString();
+                    pseudo.Clear();
                     this.Close();
                     return true;
                 default:
@@ -32,7 +33,8 @@ namespace Snake {
         }
 
         private void ok_Click(object sender, EventArgs e) {
-            p = pseudo.ToString();
+            p = pseudo.Text;
+            pseudo.Clear();
         }
     }
 }

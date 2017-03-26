@@ -23,6 +23,7 @@ namespace Snake
         private List<Cell> buffer;
         private int size;
         public ScoreList best;
+        public PseudoInput pseudoIn;
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             switch (keyData) {
@@ -73,6 +74,7 @@ namespace Snake
             imgDir = Space.Orientation.NORTH;
             size = 0;
             best = new ScoreList();
+            pseudoIn = new PseudoInput();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -148,7 +150,7 @@ namespace Snake
             gamePanel.Visible = false;
             scoresPanel.Visible = true;
             best.addScore(askPseudo(), size);
-            MessageBox.Show(best.ToString());
+            MessageBox.Show(askPseudo());
             displayScore();
             gamePanel.Controls.Clear();
         }
@@ -208,9 +210,8 @@ namespace Snake
         }
 
         private String askPseudo() {
-            PseudoInput tmp = new PseudoInput();
-            tmp.Show();
-            return tmp.p;
+            pseudoIn.ShowDialog();
+            return pseudoIn.p;
         }
 
         private void ScoresDisplay_SelectedIndexChanged(object sender, EventArgs e)
