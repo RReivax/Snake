@@ -15,6 +15,7 @@ namespace Snake
     {
         private int level;
         private Space.Orientation dir;
+        private Space.Orientation imgDir;
         private Game currentGame;
         public gameState state;
 
@@ -52,6 +53,7 @@ namespace Snake
             state = gameState.STOP;
             gamePanel.BackColor = Color.Black;
             gamePanel.BorderStyle = BorderStyle.FixedSingle;
+            imgDir = Space.Orientation.NORTH;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -93,7 +95,19 @@ namespace Snake
                         Console.WriteLine("Map : ( " + j + " ; " + i + " )");
                         Console.WriteLine("Type = " + currentGame.Map[j, i].type);
                         currentGame.Map[j, i].Location = new Point(i * 20, j * 20);
-                        currentGame.Map[j, i].Size = new Size(20, 20);                        
+                        currentGame.Map[j, i].Size = new Size(20, 20);
+
+                        if (currentGame.Map[j, i].type == CellType.HEAD)
+                        {
+                            while (imgDir != dir)
+                            {
+                                currentGame.Map[j, i].Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                if (imgDir == Space.Orientation.EAST)
+                                    imgDir = Space.Orientation.NORTH;
+                                else
+                                    imgDir++;
+                            }
+                        }
                         gamePanel.Controls.Add(currentGame.Map[j,i]);
                     }
                 }
